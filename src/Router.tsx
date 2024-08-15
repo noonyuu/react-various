@@ -8,7 +8,7 @@ import { RecoilRoot } from 'recoil'
 export const Router = () => {
   const router = [
     { path: '/', element: <Home /> },
-    { path: 'gomoku', element: <Gomoku /> }
+    { path: '/gomoku', element: <Gomoku /> }
   ]
 
   interface LayoutProps {
