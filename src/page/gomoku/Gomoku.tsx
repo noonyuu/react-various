@@ -131,7 +131,7 @@ export const Gomoku = () => {
   }
 
   return (
-    <div className="h-svh w-svw">
+    <div className="h-vh w-vw">
       <section className="flex h-full flex-col items-center justify-center">
         <div className="mb-4 text-2xl text-black ">
           {modal.isStart ? (
@@ -154,7 +154,7 @@ export const Gomoku = () => {
             </div>
           ) : (
             <div className="relative w-72">
-              {modal.isOpen && <Modal boardRefresh={boardRefresh}/>}
+              {modal.isOpen && <Modal boardRefresh={boardRefresh} />}
               {modal.isOpen ? (
                 '入力中...'
               ) : (
