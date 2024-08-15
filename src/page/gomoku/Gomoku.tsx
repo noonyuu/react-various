@@ -5,7 +5,7 @@ import { gomokuState } from './gomokuState'
 import Board from './Board'
 
 export const Gomoku = () => {
-  const mapSize: number = 3
+  const [mapSize, setMapSize] = useState<number>(5)
   // モーダルの情報
   const modal = useRecoilValue(gomokuState)
   // モーダルの開閉状態
@@ -18,14 +18,19 @@ export const Gomoku = () => {
   useEffect(() => {
     // 初期化
     boardRefresh()
-  }, [])
+  }, [mapSize])
 
   const boardRefresh = () => {
+    console.log('boardRefresh')
     setGameState(
       Array.from({ length: mapSize }).map(() =>
         Array.from({ length: mapSize }).map(() => '')
       )
     )
+  }
+
+  const handleMapSizeChange = (event: { target: { value: string } }) => {
+    setMapSize(parseInt(event.target.value, 10))
   }
 
   useEffect(() => {
@@ -91,7 +96,6 @@ export const Gomoku = () => {
   }, [gameState])
 
   const changeModal = useCallback(() => {
-    boardRefresh() // 盤面の初期化
     setModal((prev) => ({
       ...prev,
       isOpen: !prev.isOpen
@@ -150,16 +154,27 @@ export const Gomoku = () => {
             </div>
           ) : (
             <div className="relative w-72">
-              {modal.isOpen && <Modal />}
+              {modal.isOpen && <Modal boardRefresh={boardRefresh}/>}
               {modal.isOpen ? (
                 '入力中...'
               ) : (
-                <button
-                  className="cursor-pointer rounded-md border-2 border-gray-300 bg-white p-2"
-                  onClick={() => changeModal()}
-                >
-                  ゲームスタート
-                </button>
+                <div className="">
+                  <select
+                    className="mr-4 bg-white"
+                    onChange={handleMapSizeChange}
+                    value={mapSize}
+                  >
+                    <option value="3">3x3</option>
+                    <option value="5">5x5</option>
+                    <option value="10">10x10</option>
+                  </select>
+                  <button
+                    className="cursor-pointer rounded-md border-2 border-gray-300 bg-white p-2"
+                    onClick={changeModal}
+                  >
+                    ゲームスタート
+                  </button>
+                </div>
               )}
             </div>
           )}
@@ -167,7 +182,7 @@ export const Gomoku = () => {
         <div className="relative">
           {!modal.isStart && (
             <div
-              className={`bg-black opacity-30 size-${mapSize * 20} absolute z-10`}
+              className={`bg-black opacity-30 size-[${mapSize * 5}rem] absolute z-10`}
             ></div>
           )}
           <Board gameState={gameState || []} handleClick={handleClick} />

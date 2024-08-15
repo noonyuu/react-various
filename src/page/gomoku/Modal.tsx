@@ -1,12 +1,17 @@
 import { gomokuState } from '@/page/gomoku/gomokuState'
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 type PlayerDate = {
   player1: string
   player2: string
 }
-export const Modal = () => {
+
+type RefreshProps = {
+  boardRefresh: () => void
+}
+
+export const Modal: FC<RefreshProps> = ({ boardRefresh }) => {
   const setModal = useSetRecoilState(gomokuState)
   const modal = useRecoilValue(gomokuState)
   const [playerDate, setPlayerDate] = useState<PlayerDate>({
@@ -37,6 +42,7 @@ export const Modal = () => {
       isStart: true,
       ...playerDate
     }))
+    boardRefresh()
   }
 
   return (
