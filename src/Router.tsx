@@ -1,8 +1,9 @@
-import { Routes, Route, useNavigate } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
 // ファイル
 import { Home } from './Home'
-import { Gomoku } from './page/Gomoku'
+import { Gomoku } from './page/gomoku/Gomoku'
+import { RecoilRoot } from 'recoil'
 
 export const Router = () => {
   const router = [
@@ -14,7 +15,11 @@ export const Router = () => {
     element: JSX.Element
   }
   function Layout({ element }: LayoutProps) {
-    return <>{element}</>
+    return (
+      <>
+        <RecoilRoot>{element}</RecoilRoot>
+      </>
+    )
   }
 
   return (
