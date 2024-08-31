@@ -7,6 +7,9 @@ export const Home = () => {
       <div className="bg-red-500" onClick={() => navigator('/gomoku')}>
         五目並べ
       </div>
+      <div className="bg-red-500" onClick={() => navigator('/edamame')}>
+        サウンド
+      </div>
     </div>
   )
 }

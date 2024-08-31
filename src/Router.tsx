@@ -4,11 +4,13 @@ import { Routes, Route } from 'react-router-dom'
 import { Home } from './Home'
 import { Gomoku } from './page/gomoku/Gomoku'
 import { RecoilRoot } from 'recoil'
+import { Sound } from './page/animation/Sound'
 
 export const Router = () => {
   const router = [
     { path: '/', element: <Home /> },
-    { path: '/gomoku', element: <Gomoku /> }
+    { path: '/gomoku', element: <Gomoku /> },
+    { path: '/sound', element: <Sound /> }
   ]
 
   interface LayoutProps {
